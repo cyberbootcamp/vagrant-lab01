@@ -5,6 +5,9 @@
 
 # This script created from tinyurl.com/vzbyfzw
 
+sudo apt install -y curl ansible
+
+exit
 # Create demo directory for instructor
 mkdir -p /home/instructor/Documents/demo
 cd /home/instructor/Documents/demo

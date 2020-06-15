@@ -1,0 +1,31 @@
+---
+
+- name: Install Red-Team lab in Azure
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  vars:
+    home:
+      -  "{{ lookup('env','HOME') }}"
+
+    aptinstalled:
+      - vagrant
+
+    directories:
+      - { path: "jumpbox" }
+
+  tasks:
+    - name: Where is home
+      debug:
+        msg: "{{ home }}"
+
+    - name: ansible create directory
+      file:
+        path: "{{ lookup('env','HOME') }}/{{ item.path }}"
+        owner: "{{ item.owner | default('1000') }}"
+        group: "{{ item.group | default('1000') }}"
+        mode: "{{ item.mode | default('0755') }}"
+        state: "{{ item.state | default('directory') }}"
+      with_items:
+        "{{ directories }}"
